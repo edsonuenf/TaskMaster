@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMaster - O Futuro da Gestão de Projetos</title>
+    <link href="./output.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366F1',
+                        secondary: '#818CF8',
+                        cta: '#22C55E',
+                        background: '#030712',
+                        surface: '#111827',
+                        text: '#F8FAFC',
+                    },
+                    fontFamily: {
+                        sans: ['"Exo 2"', 'sans-serif'],
+                        display: ['Orbitron', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'neon': '0 0 10px rgba(99, 102, 241, 0.5), 0 0 20px rgba(99, 102, 241, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: #030712;
+            color: #F8FAFC;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .glass-card {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .neon-glow {
+            filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.5));
+        }
+    </style>
+</head>
+
+<body class="bg-background text-text overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-background/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <span class="text-2xl font-bold font-display text-primary tracking-widest">TASK<span
+                            class="text-white">MASTER</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#features"
+                            class="hover:text-primary transition-colors px-3 py-2 rounded-md font-medium">Funcionalidades</a>
+                        <a href="#pricing"
+                            class="hover:text-primary transition-colors px-3 py-2 rounded-md font-medium">Planos</a>
+                        <a href="#contact"
+                            class="hover:text-primary transition-colors px-3 py-2 rounded-md font-medium">Contato</a>
+                    </div>
+                </div>
+                <div>
+                    <a href="dashboard.html"
+                        class="bg-cta text-white px-5 py-2.5 rounded-lg font-bold hover:bg-green-500 transition-all shadow-lg hover:shadow-green-500/20">Começar
+                        Agora</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Background Effects -->
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-primary/20 rounded-full blur-[120px] -z-10 pointer-events-none">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6 tracking-tight">
+                Gestão de Projetos <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-400">Do Futuro</span>
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-400 mb-10">
+                Otimize o fluxo da sua agência digital com a plataforma definitiva.
+                Automação, colaboração e performance em um só lugar.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="dashboard.html"
+                    class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-indigo-500 transition-all shadow-neon hover:scale-105">
+                    Testar Gratuitamente
+                </a>
+                <a href="#demo"
+                    class="border border-white/20 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/5 transition-all hover:border-primary">
+                    Ver Demo
+                </a>
+            </div>
+        </div>
+
+        <!-- Hero Image / Dashboard Mockup placeholder -->
+        <div class="mt-16 relative max-w-5xl mx-auto px-4">
+            <div class="glass-card rounded-2xl p-2 md:p-4 shadow-2xl shadow-primary/20 border border-white/10">
+                <div
+                    class="aspect-video bg-surface rounded-xl flex items-center justify-center overflow-hidden relative">
+                    <!-- Placeholder Content for Dashboard -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-surface to-gray-900 border border-white/5 grid grid-cols-12 gap-4 p-6">
+                        <!-- Sidebar -->
+                        <div class="col-span-2 h-full bg-white/5 rounded-lg border border-white/5"></div>
+                        <!-- Main Content -->
+                        <div class="col-span-10 h-full flex flex-col gap-4">
+                            <!-- Header -->
+                            <div class="h-12 w-full bg-white/5 rounded-lg border border-white/5"></div>
+                            <!-- Charts -->
+                            <div class="grid grid-cols-3 gap-4 h-full">
+                                <div
+                                    class="col-span-2 bg-primary/10 rounded-lg border border-primary/20 flex items-center justify-center">
+                                    <span class="font-display text-primary/50 text-xl">Analytics Real-time</span>
+                                </div>
+                                <div class="col-span-1 bg-white/5 rounded-lg border border-white/5"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-surface/30 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Funcionalidades de Outro Mundo</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Tudo que sua agência precisa para escalar sem perder a
+                    qualidade.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="glass-card p-8 rounded-2xl hover:bg-white/5 transition-all group">
+                    <div
+                        class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Automação IA</h3>
+                    <p class="text-gray-400">Tarefas repetitivas são coisa do passado. Nossa IA gerencia fluxos e
+                        atribui tarefas automaticamente.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass-card p-8 rounded-2xl hover:bg-white/5 transition-all group">
+                    <div
+                        class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-6 text-purple-400 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Analytics Visual</h3>
+                    <p class="text-gray-400">Dashboards futuristas que mostram a saúde dos seus projetos em tempo real
+                        com precisão de dados.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass-card p-8 rounded-2xl hover:bg-white/5 transition-all group">
+                    <div
+                        class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-6 text-green-400 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Colaboração Seamless</h3>
+                    <p class="text-gray-400">Comentários em tempo real, aprovações de clientes em um clique e chat
+                        integrado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="py-12 border-y border-white/5 bg-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-gray-500 text-sm tracking-widest font-display mb-8 uppercase">Confiado por
+                agências inovadoras</p>
+            <div
+                class="flex flex-wrap justify-center items-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                <!-- Fictional Logos -->
+                <div class="text-2xl font-bold font-display flex items-center gap-2">
+                    <div class="w-8 h-8 bg-white rounded-full"></div> NEXUS
+                </div>
+                <div class="text-2xl font-bold font-display flex items-center gap-2">
+                    <div class="w-8 h-8 bg-white rounded-full"></div> ORBITAL
+                </div>
+                <div class="text-2xl font-bold font-display flex items-center gap-2">
+                    <div class="w-8 h-8 bg-white rounded-full"></div> HYPERION
+                </div>
+                <div class="text-2xl font-bold font-display flex items-center gap-2">
+                    <div class="w-8 h-8 bg-white rounded-full"></div> VORTEX
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 relative overflow-hidden">
+        <!-- Background Glow -->
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[100px] -z-10 pointer-events-none">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">Planos para Escalabilidade</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">Escolha a ferramenta certa para o seu nível de jogo.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+
+                <!-- Starter Plan -->
+                <div class="glass-card p-8 rounded-2xl hover:border-white/20 transition-all relative group">
+                    <h3 class="text-xl font-bold text-gray-400 mb-2">Freelancer</h3>
+                    <div class="text-4xl font-bold mb-6 font-display">Gratuito</div>
+                    <p class="text-sm text-gray-500 mb-8">Para quem está começando a organizar o caos.</p>
+                    <ul class="space-y-4 mb-8 text-gray-300">
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-green-500" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg> Até 3 Projetos</li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-green-500" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg> Tarefas Ilimitadas</li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-green-500" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg> 1 Usuário</li>
+                    </ul>
+                    <a href="dashboard.html"
+                        class="block w-full py-3 rounded-xl border border-white/20 text-center font-bold hover:bg-white/5 transition-all">Começar
+                        Grátis</a>
+                </div>
+
+                <!-- Pro Plan (Featured) -->
+                <div class="glass-card p-10 rounded-2xl border-primary/50 shadow-neon relative scale-105 z-10">
+                    <div
+                        class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                        Mais Popular</div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Studio</h3>
+                    <div class="text-5xl font-bold mb-6 font-display">R$ 49<span
+                            class="text-lg text-gray-500 font-sans font-normal">/mês</span></div>
+                    <p class="text-sm text-gray-400 mb-8">Poder total para pequenas agências e times ágeis.</p>
+                    <ul class="space-y-4 mb-8 text-white">
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-primary" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg> Projetos Ilimitados</li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-primary" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg> Automação IA (1000 créditos)</li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-primary" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg> Até 5 Usuários</li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-primary" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg> Colaboração Externa</li>
+                    </ul>
+                    <a href="#"
+                        class="block w-full py-4 rounded-xl bg-cta text-white text-center font-bold hover:bg-green-500 shadow-lg shadow-green-500/20 transition-all hover:-translate-y-1">Assinar
+                        Agora</a>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="glass-card p-8 rounded-2xl hover:border-white/20 transition-all relative group">
+                    <h3 class="text-xl font-bold text-gray-400 mb-2">Agency</h3>
+                    <div class="text-4xl font-bold mb-6 font-display">R$ 199<span
+                            class="text-lg text-gray-500 font-sans font-normal">/mês</span></div>
+                    <p class="text-sm text-gray-500 mb-8">Controle absoluto para grandes operações.</p>
+                    <ul class="space-y-4 mb-8 text-gray-300">
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-green-500" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg> Tudo do Studio</li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-green-500" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg> Automação IA Ilimitada</li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-green-500" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg> Usuários Ilimitados</li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-green-500" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg> API Dedicada</li>
+                    </ul>
+                    <a href="#"
+                        class="block w-full py-3 rounded-xl border border-white/20 text-center font-bold hover:bg-white/5 transition-all">Falar
+                        com Vendas</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-surface/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">O que dizem os líderes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="glass-card p-8 rounded-xl flex gap-6 items-start">
+                    <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Felix" alt="User"
+                        class="w-16 h-16 rounded-full bg-white/10">
+                    <div>
+                        <p class="text-gray-300 italic mb-4">"O TaskMaster mudou completamente a forma como nossa
+                            agência opera. A automação economiza pelo menos 20 horas por semana."</p>
+                        <h4 class="font-bold text-white">Ricardo Silva</h4>
+                        <span class="text-sm text-primary">CEO, Nexus Digital</span>
+                    </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="glass-card p-8 rounded-xl flex gap-6 items-start">
+                    <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Ana" alt="User"
+                        class="w-16 h-16 rounded-full bg-white/10">
+                    <div>
+                        <p class="text-gray-300 italic mb-4">"A interface é incrível e meus clientes adoram ver o
+                            progresso em tempo real. Vale cada centavo."</p>
+                        <h4 class="font-bold text-white">Ana Costa</h4>
+                        <span class="text-sm text-primary">Freelancer Fullstack</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Final -->
+            <div
+                class="mt-20 p-12 rounded-3xl bg-gradient-to-r from-primary/20 to-purple-600/20 border border-primary/30 text-center relative overflow-hidden">
+                <div class="relative z-10">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-6">Pronto para o futuro?</h2>
+                    <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">Junte-se a mais de 5.000 agências que já
+                        estão operando no próximo nível.</p>
+                    <a href="dashboard.html"
+                        class="inline-block bg-white text-primary px-10 py-4 rounded-xl font-bold text-xl hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl">Criar
+                        Conta Gratuita</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-background border-t border-white/10 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <span class="text-2xl font-bold font-display text-primary tracking-widest mb-4 block">TASK<span
+                            class="text-white">MASTER</span></span>
+                    <p class="text-gray-500 max-w-sm">Revolucionando a forma como agências e freelancers gerenciam
+                        projetos. O futuro é agora.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Produto</h4>
+                    <ul class="space-y-2 text-gray-500">
+                        <li><a href="#" class="hover:text-primary transition-colors">Funcionalidades</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Integrações</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Preços</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Empresa</h4>
+                    <ul class="space-y-2 text-gray-500">
+                        <li><a href="#" class="hover:text-primary transition-colors">Sobre</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Carreiras</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Contato</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 text-center text-gray-600 text-sm">
+                &copy; 2026 TaskMaster. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script src="./supabase-config.js"></script>
+
+</body>
+
+</html>
